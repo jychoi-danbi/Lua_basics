@@ -1,0 +1,43 @@
+--[[
+	How to use function in Lua
+	1. Defining a function
+	2. Call defined function
+	3. Assigning and passing functions
+	4. Function with variable argument
+]]--
+
+-- 1. Defining a function
+function num_cmp(num1, num2)
+	if (num1 > num2) then
+		return num1;
+	else
+		return num2;
+	end
+end
+
+-- 2. Call defined function
+print("The greater number is : ", num_cmp(10, 5))
+
+-- 3. Assigning and passing functions
+my_print = function (param)
+	print("my_print > parameter is : ", param);
+end
+
+function add (num1, num2, print_func)
+	res = num1 + num2
+	print_func(res)
+end
+
+add(2, 7, my_print)
+
+-- 4. Function with variable argument
+function avg(...)
+	res = 0
+	local param = {...}
+	for i, v in ipairs(param) do
+		res = res + v
+	end
+	return res / #param
+end
+
+print("The average from 1 to 10 is : ", avg(1, 2, 3, 4, 5, 6, 7, 8, 9, 10))

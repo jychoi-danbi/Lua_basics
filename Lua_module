@@ -1,0 +1,26 @@
+--[[
+	<Lua modules>
+	Module is like a library that can be loaded using require and has a single global name containing a table.
+	This module can consist of a number of functions and variables.
+	All these functions and variables are wrapped in to the table, which acts as a namespace.
+	Also, a well behaved module has necessary provisions to retyrn this table on require.
+
+	<Specialty of Lua modules>
+	The usage of tables in modules helps us in numerous ways and enables us  to manipulate the modules in the same way we manipluate any other Lua table.
+	As a result of the ability to manipulate modules, it provides extra features for which other language need special mechanisms.
+	Due to this free mechanism of modules in Lua, a user can call the functions in Lua in multiple ways.
+]]--
+
+io.write(
+	"How to require modules\n\n",
+	"<Method 1>\n",
+	"require \"[module name]\"\n",
+	"[module name].[function name]([arguments])\n\n",
+	"<Method 2>\n",
+	"local [variable name] = require \"[module name]\"\n",
+	"[module name].[function name]([arguments])\n\n",
+	"<Method 3>\n",
+	"require \"[module name]\"\n",
+	"local [variable name] = [module name].[function name]\n",
+	"[variable name]([arguments])\n\n"
+)

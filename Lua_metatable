@@ -1,0 +1,110 @@
+--[[
+	Metatable
+	1. What is metatable?
+		- Metatable is a table that helps in modifying the behavior of a table it is attached to with the help of a key set and relatedmeta methods.
+		- There meta methods are powerful Lua functionality that enables features like
+			- Changing(adding) functionalities to operators on tables.
+			- Looking up metatables when the key is not available in the table using __index in metatable.
+		- There are two important methods that are used in handling metatables which includes
+			- setmatatable(table, metatable) : This method used to set metatable for a table.
+			- getmetatable(table) : This method used to get metatable of a table.
+	2. Table operators
+		__add : Changes the behavior of '+'
+		__sub : Changes the behavior of '-'
+		__mul : Changes the behavior of '*'
+		__div : Changes the behavior of '/'
+		__mod : Changes the behavior of '%'
+		__unm : Changes the behavior of '-'
+		__concat : Changes the behavior of '..'
+		__eq : Changes the behavior of '=='
+		__lt : Changes the behavior of '<'
+		__le : Changes the behavior of '<='
+]]--
+
+-- Metatable setting
+tmp_table = {}
+tmp_metatable = {}
+setmetatable(tmp_table, tmp_metatable)
+
+tmp_table = setmetatable({}, {}) -- This code has same meaning with the code above
+
+-- Using __index
+tmp_table = setmetatable( { key1 = "value" }, {
+	__index = function(tmp_table, key)
+		if key == "key2" then
+			return "metatablevalue"
+		else
+			return tmp_table[key]
+		end
+	end
+} )
+
+print(string.format("tmp_table.key1 : [%s], tmp_table.key2 : [%s]\n", tmp_table.key1, tmp_table.key2))
+
+-- Using __newindex
+tmp_table = setmetatable({key1 = "value1"}, {
+	__newindex = function(tmp_table, key, value)
+		rawset(tmp_table, key, "\"" .. value .. "\"")
+	end
+} )
+
+tmp_table.key1 = "new value"
+tmp_table.key2 = 4
+
+print(string.format("tmp_table.key1 : [%s], tmp_table.key2 : [%s]\n", tmp_table.key1, tmp_table.key2))
+
+-- Adding tables
+tmp_table = setmetatable( { 1, 2, 3 }, {
+	__add = function(tmp_table, new_table)
+		for i = 1, table.maxn(new_table) do
+			table.insert(tmp_table, table.maxn(tmp_table) + 1, new_table[i])
+		end
+		
+		return tmp_table
+	end
+} )
+
+sec_table = { 4, 5, 6 }
+
+tmp_table = tmp_table + sec_table
+
+for k, v in ipairs(tmp_table) do
+	print(string.format("[%d]th element from tmp_table is [%s]", k, v))
+end
+print("\n")
+
+-- Calling methods
+tmp_table = setmetatable( { 10 }, {
+	__call = function(tmp_table, new_table)
+		sum = 0
+
+		for i = 1, table.maxn(tmp_table) do
+			sum = sum + tmp_table[i]
+		end
+
+		for i = 1, table.maxn(new_table) do
+			sum = sum + new_table[i]
+		end
+
+		return sum
+	end
+} )
+
+new_table = { 10, 20, 30 }
+print(string.format("{ 10 } + { 10, 20, 30 } = [ %d ]", tmp_table(new_table)))
+print(string.format("{ 10 } + { 10 } = [ %d ]\n", tmp_table(tmp_table)))
+
+-- Tostring method
+tmp_table = setmetatable( { 10, 20, 30 }, {
+	__tostring = function(tmp_table)
+		sum = 0
+		
+		for k, v in pairs(tmp_table) do
+			sum = sum + v
+		end
+
+		return string.format("__tostring > The sum of values from tmp_table = { 10, 20, 30 } is [%d]", sum)
+	end
+} )
+
+print(tmp_table)

@@ -1,0 +1,51 @@
+--[[
+	Iterator in Lua
+	1. What is Iterator : use for create various data structure like array
+	2. Categories of iterator
+		- Stateless iterators : Type of iterator function which doesn't retian any state
+		- Stateful iterators : Type of iterator function which returns the next element of the collection based on a second variable sent to the function
+]]--
+
+tmp_arr = { "Lua", "Tutorial" }
+
+for key, value in ipairs(tmp_arr) do
+	print(string.format("key & value : [%d, %s]", key, value))
+end
+print("")
+
+-- Stateless itreator
+function square(max_cnt, cur_cnt)
+	if cur_cnt < max_cnt then
+		cur_cnt = cur_cnt + 1
+		return cur_cnt, (cur_cnt * cur_cnt)
+	end
+end
+
+function squares(max_cnt)
+	return square, max_cnt, 0
+end
+
+for n, sq in squares(4) do
+	print(string.format("square %d is %d", n, sq))
+end
+print("")
+
+-- Stateful iterator
+function element_iter(collection)
+	local index = 0
+	local cnt = #collection
+	
+	-- Closure function return
+	return function()
+		index = index + 1
+		
+		if index <= cnt then
+			-- return current element of iterator
+			return collection[index]
+		end
+	end
+end
+
+for element in element_iter(tmp_arr) do
+	print(element)
+end

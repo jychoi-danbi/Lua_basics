@@ -1,0 +1,79 @@
+--[[
+	<Tables in Lua>
+	Tables are called objects and they are neither values nor variables.
+	Lua uses a constructor expression {} to create empty table.
+	It is to be known that there is no fixed relationship between a variable that holds reference of table and the table itself.
+
+	<Table manipulation>
+	table.concat(table,( sep(, i(, j)))) : Concatenates the strings in the tables based on the parameters
+	table.insert(table, [pos, ] value) : Insert a value into the table (at specified position.)
+	table.maxn(table) : Returns the largest numeric index.
+	table.remove(table [, pos]) : Removes the value from the table
+	table.sort(table [, comp]) : Sort table based on optional comparator argument.
+]]--
+
+-- Table initialization
+a_table = {}
+
+-- Type of tables
+print(string.format("The type of Table is [%s]\n", type(a_table)))
+
+-- Table value assginment
+a_table[1] = "Lua"
+a_table["str"] = "Tutorial"
+
+print(string.format("a_table[1] : %s", a_table[1]))
+print(string.format("a_table[\"str\"] : %s\n", a_table["str"]))
+
+-- Alternate table and table refers to same table
+alt_table = a_table
+
+print(string.format("alt_table[1] : %s", alt_table[1]))
+print(string.format("alt_table[\"str\"] : %s\n", alt_table["str"]))
+
+alt_table["str"] = "Changed!"
+
+print("alt_table[\"str\"] = \"Changed!\" executed!")
+print(string.format("a_table[\"str\"] : %s, alt_table[\"str\"] : %s\n", a_table["str"], alt_table["str"]))
+
+-- Remove reference
+alt_table = nil
+
+print("alt_table removed! [", alt_table, "]")
+print("But, table is still accessible [", a_table, "]\n")
+
+a_table = nil
+print("table removed! [", a_table, "]\n")
+
+-- Garbage collection will take care of releasing memory
+
+-- Table concatenation
+fruits = { "banana", "orange", "strawberry", "apple" }
+
+print(string.format("table.concat(fruits) test : %s", table.concat(fruits)))
+print(string.format("table.concat(fruits, \", \") test : %s", table.concat(fruits, ", ")))
+print(string.format("table.concat(fruits, \", \", 2, 3) test : %s\n", table.concat(fruits, ", ", 2, 3)))
+
+-- Table insert & remove
+table.insert(fruits, "mango")
+print(string.format("New fruit inserted! [%s]", fruits[5]))
+
+table.insert(fruits, 2, "grapes")
+print(string.format("New fruit inserted at fruits[2]! [%s], table.maxn(fruits) : [%d]", fruits[2], table.maxn(fruits)))
+
+print(string.format("Last fruit in fruits table! [%s]", fruits[table.maxn(fruits)]))
+
+table.remove(fruits)
+print(string.format("Last fruit in fruits table after table removed! [%s], table.maxn(fruits) : [%d]\n", fruits[table.maxn(fruits)], table.maxn(fruits)))
+
+-- Table sort
+for k, v in ipairs(fruits) do
+	print(string.format("[%d]th element in fruits table : [%s]", k ,v))
+end
+
+table.sort(fruits)
+print("fruits table sorted!")
+
+for k, v in ipairs(fruits) do
+	print(string.format("[%d]th element in fruits table : [%s]", k ,v))
+end

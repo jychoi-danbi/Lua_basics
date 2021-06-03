@@ -1,0 +1,41 @@
+--[[
+	Loops in Lua
+	1. while loop : Repeats a statement or groupof statements while given condition is true. Condition will be tested before executing the loop.
+	2. for loop : Repeats a seqence of statements multiple times and abbreviates the code manages loop variable.
+	3. repeat - until loop : Repeats the operation of group statements till until condition is met.
+	4. nested loops : loops inside loop
+
+	Loop control statement in Lua
+	1. break : Terminates the loop and transfers execution to the statement immidiately following the loop or switch.
+
+	Infinite loop : The loop condition never become false
+]]--
+
+i = 1
+
+while (i > 0) do
+	print(tostring(i) .. "th repeat in while loop!")
+	i = i - 1
+end
+
+print("");
+
+for i = 10, 1, -1 do
+	print(tostring(11 - i) .. "th repeat in for loop! [ " .. tostring(i) .. " ]")
+end
+
+print("")
+
+i = 1
+
+repeat
+	print(tostring(i) .. "th repeat in repeat - until loop!")
+	i = i + 1
+until (i > 5)
+
+print("")
+
+for i = 5, 1, -1 do
+	if ( i == 2 ) then break end
+	print(tostring(6 - i) .. "th repeat before break!")
+end

@@ -1,0 +1,57 @@
+--[[
+	File I/O in Lua
+	1. File open modes
+		- r : Read-only mode and is the default mode where an existing file is opened.
+		- w : Write enabled mode that overwrites the exsiting file or creates a new file.
+		- a : Append mode that opens an existing file or creates a new file for appending.
+		- r+ : Read and write mode for an existing file.
+		- w+ : All existing data is removed if file exists or new file is created with read write permissions.
+		- a+ : Append mode with read mode enabled that opens an existing file or creates a new file.
+		- *n : Reads from the current file position and returns a number if exists at the file position or returns nil.
+		- *a : Returns all the contents of file from the current file position
+		- *i : Reads the line from the current file position, and moves file position to next line.
+		- number : Reads number of bytes specified in the function.
+	2. File methods
+		- io.open(file_name, mode) : Opens a file in read
+		- io.close(file_variable) : Close open file
+		- io.input(file_variable) : Sets the default input file as [file_variable]
+		- io.output(file_variable) : Sets the default output file as [file_variable]
+		- io.read() : Prints the first line of file
+		- io.write(str) : Appends a [str] to the last line of file
+		- io.tmpfile() : Returns a temporary file for reading and writing that will be removed once the program quits.
+		- io.type(file) : Returns whether file, closed file or nill based on the input file.
+		- io.flush() : Clears the default output buffer.
+		- io.lines(optional_file_name) : Provides a generic for loop iterators that loops through the file and closes the file in the end, in case the file name is provided ir the default file is used and not closed in the ebd of the loop.
+	3. Explicit file methods
+		- file:close() : Close open file
+		- file:read() : Prints the first line of file
+		- file:write(str) : Appends a [str] to the last line of file
+		- file:flush() : Clears the default output buffer.
+		- file:seek(optional_whence, opitonal_offset) : Whence parameter is "set", "cur" or "end". Sets the new file pointer with the updated file position from the beginning of the file. The offsets are zero-based in this function. Default is file:seek("cur", 0)
+			- set : The offset is mesured from the beginning of the file
+			- cur : The offset is mesured from the current position of the file
+			- end : The offset is mesured from the end of the file
+]]--
+
+file = io.open("aa.txt", "r")
+io.input(file)
+print("The first line of test file is [" .. io.read() .. "]\n")
+io.close(file)
+
+file = io.open("aa.txt", "a")
+io.output(file)
+io.write("#####This line is added in Lua#####\n")
+io.close(file)
+
+file = io.open("aa.txt", "r")
+print("The first line of test file is [" .. file:read() .. "]\n")
+file:close()
+
+file = io.open("aa.txt", "a")
+file:write("#####This line is added in Lua#####\n")
+file:close()
+
+file = io.open("aa.txt", "r")
+file:seek("end", -39)
+print("The file:seek(\"end\", -39) of test file is [" .. file:read("*a") .. "]\n")
+file:close()

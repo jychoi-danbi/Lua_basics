@@ -1,0 +1,19 @@
+--[[
+	Data types in Lua
+	nil : similar as NULL
+	boolean : Includes true and false
+	number : Double precision floating point numbers
+	string : Array of characters
+	function : Method which written in C or Lua
+	userdata : Arbitrary C data
+	thread : Independent threads of execution
+	table : Ordinary arrays, symbol tables, sets, records, graphs, treesm etc..., and implements associative arrays. Any value can be stored, except nil
+]]--
+
+-- Data types in Lua
+print(type(5.8 * 10))
+print(type(true))
+print(type(print))
+print(type(nil))
+print(type("Test string"))
+print(type(type(ABC)))

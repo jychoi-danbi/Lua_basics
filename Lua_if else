@@ -1,0 +1,20 @@
+--[[
+	Decision making in Lua
+	1. if statement : Execute statements according to condition
+	2. if - else statement : Execute statements in if statement when condition is ture. If not, execute statements in else statement
+	3. nested if statements : if statement inside if statement
+]]--
+
+i = 10
+
+if ( i > 20) then
+	print("Variable is greater than 20!")
+else
+	print("Variable is less than 20!")
+	
+	if (i >= 10) then
+		print("Variable is greater than or equal to 10! - nested if")
+	else
+		print("Variable is less than or equal to 10! - nested if")
+	end
+end

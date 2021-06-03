@@ -1,0 +1,27 @@
+--[[
+	Error handling in Lua
+	1. Error types
+		- Syntax errors : Syntax errors occur due to improper use of various program components like operators and expressions.
+		- Run time errors : the program executes successfully, but it can result in runtime errors due ro mistake in input or mishandled functions.
+	2. pcall & xpcall
+		-pcall(f, arg1, ...) : calls f in protected mode. If some error occurs in function f, it does not throw an error. It just returns the status of error.
+		-xpcall(f, err) function calls the requested function and also sets the error handler. Any error inside f is not propagated; instead, xpcall() catches the error, calls the err function with the original error object, and returns status code.
+]]--
+
+function my_f()
+	n = n/nil
+	print("n = n/nil executed!\n")
+end
+
+if pcall(my_f) then
+	print("n = n/nil succeeded!\n")
+else
+	print("n = n/nil failed!\n")
+end
+
+function err_handler(err)
+	print(string.format("ERROR! %s", err))
+end
+
+status = xpcall(my_f, err_handler)
+print("Error status : ", status)

@@ -1,0 +1,72 @@
+--[[
+	Coroutine in Lua
+	1. What is coroutine?
+		- Coroutines are collaborative in nature, which allows two or more methods to execute in a controlled manner.
+		- With coroutines, at any time, only one coroutine runs and this running coroutine only suspends its execution when it explicitly requests to be suspended.
+	2. Coroutine functions
+		- coroutine.create(f) : Creates a new coroutine with a function f and returns an object of type "thread".
+		- coroutine.resume(co [, val1, ...]) : Resumes the coroutine co and passes the parameters if any. It returns the status of operation other return values.
+		- coroutine.running() : Returns the running coroutine or nil if called in the main thread.
+		- coroutine.status(co) : Returns one of the values from runningm normal, suspended or dead based on the state of the coroutine.
+		- coroutine.wrap(f) : Like coroutine.create(), the coroutine.wrap() function also creates a coroutine, but instead of returning the coroutine itselfm it returns a function like thatm when called, resumes the coroutine.
+		- coroutine.yield(...) : Suspends the running coroutine, The parameter passed to this method acts as additional return values to the resume function.
+]]--
+
+co = coroutine.create(
+	function(val1, val2)
+		local tmp_var3 = 10
+		print("Inside coroutine > ", val1, val2, tmp_var3) -- first resume
+
+		local tmp_var1 = coroutine.yield((val1 + 1), (val2 + 1))
+		tmp_var3 = tmp_var3 + val1
+		print("Inside coroutine 2 > ", tmp_var1, tmp_var2, tmp_var3) -- second resume
+
+		local tmp_var1, tmp_var2 = coroutine.yield((val1 + val2), (val1 - val2))
+		tmp_var3 = tmp_var3 + val1
+		print("Inside coroutine 3 > ", tmp_var1, tmp_var2, tmp_var3) -- third resume
+		
+		return val2, "end"
+	end
+)
+
+print("Inside main > ", coroutine.resume(co, 3, 2))
+print("Inside main > ", coroutine.resume(co, 12, 14))
+print("Inside main > ", coroutine.resume(co, 5, 6))
+print("Inside main > ", coroutine.resume(co, 10, 20)) -- cannot resume dead coroutine
+print("")
+
+function get_num()
+	local function get_num_help()
+		co = coroutine.create(
+			function()
+				coroutine.yield(1)
+				coroutine.yield(2)
+				coroutine.yield(3)
+				coroutine.yield(4)
+				coroutine.yield(5)
+			end
+		)
+
+		return co
+	end
+
+	if (num_help) then
+		status, num = coroutine.resume(num_help)
+	
+		if coroutine.status(num_help) == "dead" then
+			num_help = get_num_help()
+			status, num = coroutine.resume(num_help)
+		end
+
+		return num
+	else
+		num_help = get_num_help()
+		status, num = coroutine.resume(num_help)
+
+		return num
+	end
+end
+
+for i = 1, 10 do
+	print(string.format("[%d]th loop > %d", i, get_num()))
+end

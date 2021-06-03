@@ -1,0 +1,8 @@
+-- Simple print
+
+print("Test") -- Prints string(parameter), doesn't need "\n" for line change
+
+-- Prints string(with tokens), needs "\n" for line change
+io.write(
+	"Hello, your version is : ", _VERSION, "\n"
+)

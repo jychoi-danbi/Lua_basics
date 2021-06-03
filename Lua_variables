@@ -1,0 +1,13 @@
+-- Variables
+-- Variables are considered as global varables, unless you define them as "local"
+a, b = 5, 10
+
+io.write(
+	"Global variable a and b [ a : ", a, ",  b : ", b, " ]\n"
+)
+
+local c, d = 3, 4
+
+io.write(
+	"Local variable c and d [ c : ", c, ",  d : ", d, " ]\n"
+)

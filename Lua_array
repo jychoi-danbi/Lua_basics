@@ -1,0 +1,39 @@
+--[[
+	Array in Lua
+	1. One-dimensional array
+	2. Multi-dimensional array
+]]--
+
+one_dim_arr = {"Lua", "Tutorial"}
+
+for i = 1, 2 do -- one_dim_arr[0] will return nil
+	print(string.format("[%d]th value of one_dim_arr : %s", i, one_dim_arr[i]))
+end
+print("")
+
+emp_arr = {}
+
+for i = -2, 2 do
+	print(string.format("Inserting [%d] to [%d]th value of emp_arr", (i * 2), i))
+	emp_arr[i] = i * 2
+end
+for i = -2, 2 do
+	print(string.format("[%d]th value of emp_arr : %d", i, emp_arr[i]))
+end
+print("")
+
+mul_dim_arr = {}
+
+for i = 1, 3 do
+	mul_dim_arr[i] = {}
+
+	for j = 1, 3 do
+		print(string.format("Inserting [%d] to [%d][%d]th value of mul_dim_arr", i * j, i, j))
+		mul_dim_arr[i][j] = i * j
+	end
+end
+for i = 1, 3 do
+	for j = 1, 3 do
+		print(string.format("[%d][%d]th value of mul_dim_arr : %d", i, j, mul_dim_arr[i][j]))
+	end
+end

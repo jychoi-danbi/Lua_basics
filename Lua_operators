@@ -1,0 +1,77 @@
+--[[
+	Operators in Lua
+
+	1. Arithmetic operators
+		い> + : Adds two operands
+		い> - : Subtracts second operand from the first
+		い> * : Multiply both operands
+		い> / : Divide numerator by de-numerator
+		い> % : Modulus operator and reminder of after an integer division
+		い> ^ : Exponent Operator takes the expoenets
+		い> - : Unary - operator acts as negation
+	2. Relational operators
+		い> == : Checks two operand is equal or not, then return true or false
+		い> ~= : Negation of "==" operator
+		い> > : Checks left operand is greater than right operand, then return true or false
+		い> < : Checks left operand is less than right operand, then return true or false
+		い> >= : Checks left operand is greater than or equal to right operand, then return true or false
+		い> <= : Checks left operand is less than or equal to right operand, then return true or false
+	3. Logical operators
+		い> and : Checks both operands are non-zero, then return true or false
+		い> or : Checks any of two operands is non-zero, then return true or false
+		い> not : Negation of current state
+	4. Misc operators
+		い> .. : Concatenates two strings
+		い> # Unary operator that returns the length of string or table
+]]--
+
+print("\t\t<Operators in Lua>");
+
+io.write(
+	"1. Arithmetic operators\n",
+	"\t+ : Add (example : 3 + 7 = ", 3 + 7, ")\n",
+	"\t- : Subtract (example : 5 - 2 = ", 5 - 2, ")\n",
+	"\t* : Multiply (example : 3 * 3 = ", 3 * 3, ")\n",
+	"\t/ : Divide (example : 7 / 4 = ", 7 / 4, ")\n",
+	"\t% : Modulus (example : 9 % 2 = ", 9 % 2, ")\n",
+	"\t^ : Exponent (example : 2 ^ 4 = ", 2 ^ 4, ")\n",
+	"\t- : Negation (example : - 10 = ", - 10, ")\n\n"
+)
+
+io.write(
+	"2. Relational operators\n",
+	"\t== : Equal (example : 5 == 5 = ", tostring(5 == 5), ")\n",
+	"\t~= : Not equal (example : 5 ~= 5 = ", tostring(5 ~= 5), ")\n",
+	"\t> : Greater than (example : 2 > 5 = ", tostring(2 > 5), ")\n",
+	"\t< : Less than (example : 2 < 5 = ", tostring(2 < 5), ")\n",
+	"\t>= : Greater than or equal (example : 4 >= 5 = ", tostring(4 >= 5), ")\n",
+	"\t<=  : Less than or equal (example : 4 <= 5 = ", tostring(4 <= 5), ")\n\n"
+)
+
+io.write(
+	"3. Logical operators\n",
+	"\tand : true and true (example : 1 and 0 = ", tostring(1 and 0), ")\n",
+	"\tor : true or true (example : 1 or 0 = ", tostring(1 or 0), ")\n",
+	"\tnot : Negation (example : not (1 and 0) = ", tostring(not (1 and 0)), ")\n\n"
+)
+
+io.write(
+	"4. Misc operators\n",
+	"\t.. : Concatenate (example : aa .. bb = ", "aa" .. "bb", ")\n",
+	"\t# : Length of string (example : #\"aaaa\" = ", #"aaaa", ")\n"
+)
+
+print("")
+
+io.write(
+	"\t\t<Operator Precedence>\n",
+	"Category\t      Operator\t\tAssociativity\n",
+	"Unary\t\t     not, #, -\t\tRight to left\n",
+	"Concate\t\t        ..\t\tRight to left\n",
+	"Multiplicative\t      *, /, %\t\tLeft to right\n",
+	"Additive\t       +, -\t\tLeft to right\n",
+	"Relational\t<, >, <=, >=, ==, ~=\tLeft to right\n",
+	"Equality\t      ==, ~=\t\tLeft to right\n",
+	"Logically AND\t       and \t\tLeft to right\n",
+	"Logically OR\t        or\t\tLeft to right\n"
+)
